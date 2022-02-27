@@ -1,0 +1,28 @@
+{% extends 'theory/base.html' %}
+{% block header %}
+{{ block.super }}
+{% endblock %}
+
+{% block aside %}
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="formTheory">
+    <form method="post" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{form.media}}
+        <div class="BtnWrap form__BtnWrap">
+            <button type="submit" class="BtnWrap__btn">Создать</button>
+        </div>
+    </form>
+</div>
+{% else %}
+<div class="formTheory">
+    <span>
+        Слышь, тебе сюда нельзя
+    </span>
+</div>
+{% endif %}
+{% endblock %}

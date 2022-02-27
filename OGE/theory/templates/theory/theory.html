@@ -1,0 +1,40 @@
+{% extends "theory/base.html" %}
+{% block header %}
+{{ block.super }}
+{% endblock %}
+{% block content %}
+<div class="theory">
+    <div class="theory__posts">
+        {% for post in posts %}
+        <div>
+            <a class="article__link" href="{% url 'postTheory' post.id %}">
+                <div class="theory__block postBlock">
+                    <div class="postBlock__article article">
+                        <div class="article__head">
+                            {{ post.article|truncatechars:100 }}
+                        </div>
+                    </div>
+                    <div class="postBlock__userBlock userBlock">
+                        <div class="userBlock__username">
+                            {{ post.author.username }}
+                        </div>
+                        <div class="userBlock__image">
+
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pages">
+        {% for p in paginator.page_range %}
+        {% if page_obj.number == p %}
+            <a href="?page={{ p }}" class="page_now">{{ p }}</a>
+        {% else %}
+            <a href="?page={{ p }}">{{ p }}</a>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

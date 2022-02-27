@@ -1,0 +1,25 @@
+{% load static %}
+<div class="aside">
+    <div class="aside__popular popular">
+        <div class="popular__head">
+            Популярное
+        </div>
+        {% for post in popular %}
+        <a class="popularBlock" href="{% url 'postTheory' post.id %}">
+            <div class="popularBlock__info info">
+                <div class="info__data data">
+                    <div class="data__count"><img src="{% static 'img/eye.png' %}" class="eyeCounter" alt="">
+                        {{ post.count_view }}
+                    </div>
+                </div>
+                <div class="info__image">
+                    <img src="{% static 'img/computer.jpg' %}" alt="Компьютер">
+                </div>
+            </div>
+            <div class="popularBlock__article">
+                {{ post.article|truncatechars:60 }}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,41 @@
+{% extends 'theory/base.html' %}
+{% block header %}
+    {{ block.super }}
+{% endblock %}
+
+{% block aside %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="login">
+    <div class="login__header">
+        Авторизация
+    </div>
+    <div class="login__form">
+        {% if user.is_authenticated %}
+        <div class="auth">
+            <span class="auth__span">Вы уже авторизованы как {{ user.username }}</span>
+        </div>
+        {% else %}
+        <form class="form" method="post">
+            {% csrf_token %}
+            <div class="form__username form__input">
+                <label for="id_username">Логин:</label>
+                {{ form.username }}
+            </div>
+            <div class="form__password form__input">
+                <label for="id_password">Пароль:</label>
+                {{ form.password }}
+            </div>
+            <div class="form__error">
+                {{ form.non_field_errors }}
+            </div>
+            <div class="BtnWrap form__BtnWrap">
+                <button type="submit" class="BtnWrap__btn">Войти</button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

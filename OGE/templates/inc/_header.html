@@ -1,0 +1,23 @@
+<div class="header">
+    <div class="header__logo">
+        Лого
+    </div>
+    <div class="header__nav nav">
+        <ul class="nav__ul navList">
+            <li class="navList__li"><a href="{% url 'theory' %}">Теория</a></li>
+            <li class="navList__li"><a href="#">Задания</a></li>
+        </ul>
+    </div>
+    <div class="header__finder finder">
+        <input type="text" class="finder__input" id="finderInput" placeholder="Поиск...">
+        <label for="finderInput"><button id="find">&#128269;</button></label>
+    </div>
+    <div class="header__login">
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Выйти</a>
+        <a href="{% url 'addTheory' %}">{{ user.username }}</a>
+        {% else %}
+        <a href="{% url 'login' %}">Войти</a>
+        {% endif %}
+    </div>
+</div>
