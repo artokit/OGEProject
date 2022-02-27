@@ -43,8 +43,18 @@ def user_logout(request):
 
 class AddTheory(CreateView):
     template_name = 'theory/addTheory.html'
-    fields = ('article', 'content', 'author')
+    fields = ('article', 'content')
     model = TheoryPost
+
+    def post(self, request, *args, **kwargs):
+        res = self.request.POST
+        post = TheoryPost(
+            article=res['article'],
+            content=res['content'],
+            author=self.request.user
+        )
+        post.save()
+        return redirect('postTheory', post_id=post.pk)
 
 
 class PostTheoryView(DataMixin, DetailView):
